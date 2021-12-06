@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hostservice
+spec:
+  selector:
+    matchLabels:
+      app: hostservice
+  template:
+    metadata:
+      labels:
+        app: hostservice
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: server
+          image: hostservice
+          ports:
+          - containerPort: 8080
+          readinessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: "/health"
+              port: 8080
+          livenessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: "/health"
+              port: 8080
+          env:
+          - name: PORT
+            value: "8080"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hostservice
+spec:
+  type: ClusterIP
+  selector:
+    app: hostservice
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hostservice-external
+spec:
+  type: LoadBalancer
+  selector:
+    app: hostservice
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080

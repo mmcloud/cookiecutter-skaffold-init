@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{cookiecutter.service_name}}
+spec:
+  selector:
+    matchLabels:
+      app: {{cookiecutter.service_name}}
+  template:
+    metadata:
+      labels:
+        app: {{cookiecutter.service_name}}
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: server
+          image: {{cookiecutter.service_name}}
+          ports:
+          - containerPort: 8080
+          readinessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: "/health"
+              port: 8080
+          livenessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: "/health"
+              port: 8080
+          env:
+          - name: PORT
+            value: "8080"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{cookiecutter.service_name}}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{cookiecutter.service_name}}
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{cookiecutter.service_name}}-external
+spec:
+  type: LoadBalancer
+  selector:
+    app: {{cookiecutter.service_name}}
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080

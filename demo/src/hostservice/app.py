@@ -1,23 +1,23 @@
 """
-A sample Hello World server.
+A sample server.
 """
 import os
-import requests
 import socket
 
 
 from flask import Flask, render_template
 
-import ms_pb2
-import ms_pb2_grpc
-import grpc
+import socket
+
+
+from flask import Flask, render_template
+
 
 # pylint: disable=C0103
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    """Return a friendly HTTP greeting."""
     host = socket.gethostname()
     return render_template('index.html',
         host=host)

@@ -1,0 +1,14 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  artifacts:
+  - image: {{cookiecutter.service_name}}
+    context: src/{{cookiecutter.service_name}}
+  tagPolicy:
+    gitCommit: {}
+  local:
+    useBuildkit: false
+deploy:
+  kubectl:
+    manifests:
+    - ./kubernetes-manifests/{{cookiecutter.service_name}}.yaml

@@ -1,0 +1,14 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  artifacts:
+  - image: hostservice
+    context: src/hostservice
+  tagPolicy:
+    gitCommit: {}
+  local:
+    useBuildkit: false
+deploy:
+  kubectl:
+    manifests:
+    - ./kubernetes-manifests/hostservice.yaml
