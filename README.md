@@ -1,6 +1,26 @@
 # Cookiecutter Skaffold Init
 
-Part 1 of my blog please see: [skaffold-installation](https://www.matthewmcleod.co.uk/skaffold-installation/)
+This repo is used to demo my blog posts to read more information on whats going on please see the following posts
+
+## Sections
+
+1) For [skaffold-installation](https://www.matthewmcleod.co.uk/skaffold-installation/)
+
+    ```bash
+    cookiecutter https://github.com/mmcloud/cookiecutter-skaffold-init --checkout v1.0.0
+    ```
+
+2) For [skaffold-profiles](https://www.matthewmcleod.co.uk/skaffold-profiles)
+
+    ```bash
+    cookiecutter https://github.com/mmcloud/cookiecutter-skaffold-init --checkout v2.0.0
+    ```
+
+3) For [skaffold-helm](https://www.matthewmcleod.co.uk/skaffold-helm)
+
+    ```bash
+    cookiecutter https://github.com/mmcloud/cookiecutter-skaffold-init --checkout v3.0.0
+    ```
 
 
 ## Quick start
