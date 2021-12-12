@@ -1,6 +1,6 @@
 # Cookiecutter Skaffold Init
 
-Part 1 of my blog please see: (skaffold-installation)[https://www.matthewmcleod.co.uk/skaffold-installation/]
+Part 1 of my blog please see: [skaffold-installation](https://www.matthewmcleod.co.uk/skaffold-installation/)
 
 
 ## Quick start
